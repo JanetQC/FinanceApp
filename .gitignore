@@ -1,2 +1,14 @@
-*/app/src/main/java/com/example/janetdo/financeapp/Credentials.java
-
+/app/src/main/java/com/example/janetdo/financeapp/Credential
+.gradle
+.idea
+/build
+build/
+*Credentials.java
+.gradle
+.idea
+*.bat
+*.iml
+gradlew
+gradle/
+local.properties
+*.DS_Store
