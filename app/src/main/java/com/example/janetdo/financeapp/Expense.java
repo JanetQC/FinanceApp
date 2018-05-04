@@ -23,7 +23,9 @@ public class Expense {
         this.isExpense = isExpense;
     }
 
- 
+    public boolean isExpense() {
+        return isExpense;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,5 +44,17 @@ public class Expense {
 
     public double getAmount() {
         return this.amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "category=" + category +
+                ", subcategory=" + subcategory +
+                ", comment='" + comment + '\'' +
+                ", amount=" + amount +
+                ", isExpense=" + isExpense +
+                ", time=" + time +
+                '}';
     }
 }

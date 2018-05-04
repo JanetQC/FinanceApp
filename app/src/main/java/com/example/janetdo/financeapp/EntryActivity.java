@@ -8,6 +8,9 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by janetdo on 22.04.18.
@@ -15,13 +18,15 @@ import java.util.Arrays;
 
 public class EntryActivity extends AppCompatActivity {
     private CloudantService cloudant;
-
+    List<Category> allCategories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cloudant = new CloudantService();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.entry);
+        allCategories= Arrays.asList(Category.values());
+        getEachCategory();
     }
 
     public void removeText(View view) {
@@ -29,6 +34,23 @@ public class EntryActivity extends AppCompatActivity {
         EditText text = findViewById(R.id.commentBox);
         text.setText("");
     }
+
+    public Map<Category, Double> getEachCategory() {
+        Map<Category, Double> catgeoryMap = new HashMap<>();
+
+        allCategories.stream().forEach(category -> {
+            List<Expense> tempList = cloudant.selectCategory(category);
+            double categorySum = tempList.stream().filter(ele -> ele.isExpense()).map(exp -> exp.getAmount()).mapToDouble(Double::doubleValue).sum();
+            double reimbursementSum = tempList.stream().filter(ele -> !ele.isExpense()).map(exp -> exp.getAmount()).mapToDouble(Double::doubleValue).sum();
+
+            double resultSum = categorySum - reimbursementSum;
+            catgeoryMap.put(category, resultSum);
+        });
+
+        System.out.println(catgeoryMap.entrySet().toString());
+        return catgeoryMap;
+    }
+
 
     public void saveEntry(View view) {
         EditText commentBox = findViewById(R.id.commentBox);
