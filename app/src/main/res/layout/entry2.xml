@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dip"
+    android:stretchColumns="1">
+    <TableRow>
+    <TextView
+        android:layout_column="1"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/amountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Betrag" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:gravity="left"
+        android:onClick="removeText"
+        android:inputType="numberDecimal"
+        />
+
+    </TableRow>
+
+    <TableRow>
+    <TextView
+        android:id="@+id/category"
+        android:layout_marginLeft="10dp"
+        android:layout_column="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategorie" />
+    </TableRow>
+
+
+    <TableRow>
+    <TextView
+        android:id="@+id/subcategory"
+        android:layout_column="1"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subkategorie" />
+    </TableRow>
+
+
+    <TableRow>
+        <TextView
+            android:id="@+id/comment"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kommentar" />
+
+        <EditText
+            android:id="@+id/commentBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:textSize="15dp"
+            android:inputType="textPersonName"
+            android:onClick="removeText"
+            android:text="Kommentar eingeben"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_column="1"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datum" />
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="8"
+            android:onClick="removeText"
+            android:inputType="date" />
+
+    </TableRow>
+
+    <TableRow>
+        <RadioButton
+            android:id="@+id/expense"
+            android:layout_column="1"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Ausgabe" />
+
+        <RadioButton
+            android:id="@+id/reimbursement"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Einnahme" />
+    </TableRow>
+    <Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignEnd="@+id/amount"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="37dp"
+    android:layout_marginEnd="13dp"
+    android:onClick="saveEntry"
+    android:text="Speichern" />
+
+
+</TableLayout>
