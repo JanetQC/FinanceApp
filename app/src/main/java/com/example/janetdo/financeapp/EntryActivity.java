@@ -7,6 +7,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,15 +21,21 @@ import java.util.Map;
 
 public class EntryActivity extends AppCompatActivity {
     private CloudantService cloudant;
-    List<Category> allCategories;
+    private RadioButton expense;
+    private RadioButton reimbursement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        cloudant = new CloudantService();
+        cloudant = CloudantService.getInstance();
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.entry);
-        allCategories= Arrays.asList(Category.values());
-        getEachCategory();
+
+
+        setContentView(R.layout.entry2);
+        EditText date = findViewById(R.id.date);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("d.MM.yy");
+        date.setText(format.format(timestamp));
+
     }
 
     public void removeText(View view) {
@@ -35,33 +44,26 @@ public class EntryActivity extends AppCompatActivity {
         text.setText("");
     }
 
-    public Map<Category, Double> getEachCategory() {
-        Map<Category, Double> catgeoryMap = new HashMap<>();
-
-        allCategories.stream().forEach(category -> {
-            List<Expense> tempList = cloudant.selectCategory(category);
-            double categorySum = tempList.stream().filter(ele -> ele.isExpense()).map(exp -> exp.getAmount()).mapToDouble(Double::doubleValue).sum();
-            double reimbursementSum = tempList.stream().filter(ele -> !ele.isExpense()).map(exp -> exp.getAmount()).mapToDouble(Double::doubleValue).sum();
-
-            double resultSum = categorySum - reimbursementSum;
-            catgeoryMap.put(category, resultSum);
-        });
-
-        System.out.println(catgeoryMap.entrySet().toString());
-        return catgeoryMap;
+    public void setExpense(View view) {
+        reimbursement = findViewById(R.id.reimbursement);
+        reimbursement.setChecked(false);
     }
+
+    public void setReimbursement(View view) {
+        expense = findViewById(R.id.expense);
+        expense.setChecked(false);
+    }
+
+
 
 
     public void saveEntry(View view) {
         EditText commentBox = findViewById(R.id.commentBox);
-        EditText date = findViewById(R.id.date);
         EditText amountField = findViewById(R.id.amount);
         RadioButton expenseField = findViewById(R.id.expense);
 
         String comment = commentBox.getText().toString().trim();
-        String dateText = date.getText().toString().trim();
-        //   float amount = (float) amountField.getText().toString();
-        double amount = 0.0;
+        double amount = Double.valueOf( amountField.getText().toString());
         boolean isExpense = expenseField.isChecked();
         Category category = Category.entertainment;
         Category subcategory = Category.entertainment;
@@ -76,5 +78,9 @@ public class EntryActivity extends AppCompatActivity {
         }
 
         finish();
+    }
+
+    private void calculatePercentageValues(){
+
     }
 }

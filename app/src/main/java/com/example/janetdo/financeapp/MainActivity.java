@@ -14,6 +14,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("time: "+ timestamp);
+        SimpleDateFormat formattt = new SimpleDateFormat("d.MM.yy");
     }
 
 
@@ -41,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void startBarChartActivity(View view) {
         Intent intent = new Intent(this, BarChartActivity.class);
+        startActivity(intent);
+    }
+
+    public void startLineChartActivity(View view) {
+        Intent intent = new Intent(this, LineChartActivity.class);
         startActivity(intent);
     }
 }

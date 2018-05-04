@@ -64,7 +64,7 @@
             android:textSize="15dp"
             android:inputType="textPersonName"
             android:onClick="removeText"
-            android:text="Kommentar eingeben"/>
+            />
     </TableRow>
 
     <TableRow>
@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:onClick="setExpense"
             android:text="Ausgabe" />
 
         <RadioButton
@@ -100,6 +101,7 @@
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="setReimbursement"
             android:text="Einnahme" />
     </TableRow>
     <Button
